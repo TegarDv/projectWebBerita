@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\MainController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,11 +16,13 @@ use App\Http\Controllers\KategoriController;
 |
 */
 
-Route::get('/', [NewsController::class,'index']);
+Route::get('/', [MainController::class,'index']);
+Route::get('/about', [MainController::class,'index']);
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::resource('news', NewsController::class);
+Route::get('/search', [NewsController::class, 'search'])->name('search');
 Route::resource('kategori', KategoriController::class);

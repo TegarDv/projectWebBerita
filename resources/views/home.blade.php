@@ -1,11 +1,13 @@
 @extends('layouts.app')
-
+@section('title')
+    Web Berita | Home
+@endsection
 @section('content')
-<div class="container">
+<div class="container mt-5" style="margin-top: 10%; margin-bottom: 50%">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+                <div class="card-header" align="center">{{ __('Detail Akun') }}</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -23,7 +25,8 @@
                         <tr><th>Email</th><th>:</th><td>{{ $user->email }}</td></tr>
                         <tr><th>Role</th><th>:</th><td>{{ $user->role }}</td></tr>
                     </table>
-                    <a href="/news/" class="btn btn-primary">Go To Dashboard</a><br><br>
+                    <a href="/news/" class="btn btn-primary">Go To Dashboard</a>
+                    <a href="/news/" class="btn btn-primary">Go to Main Page</a><br><br>
                 </div>
             </div>
         </div>

@@ -7,8 +7,7 @@ use App\Models\News;
 use App\Models\Kategori;
 use Illuminate\Support\Facades\Gate;
 
-
-class NewsController extends Controller
+class MainController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -23,19 +22,16 @@ class NewsController extends Controller
         //     abort(403, 'Anda tidak memiliki cukup hak akses');
         // });
     }
-
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    
     public function index()
     {
-        $news = News::paginate(5)->withQueryString();;
-        return view('news.index',['news'=>$news]);
+        $news = News::paginate(7)->withQueryString();
+        return view('main.index',['news'=>$news]);
     }
-
 
     /**
      * Show the form for creating a new resource.
@@ -66,7 +62,6 @@ class NewsController extends Controller
         $kategori = new Kategori;
         $kategori->id = $request->Kategori;
 
-        $news->pesan_singkat = $request->isi;
         $news->isi = $request->isi;
         $news->photo = $image_name;
         $news->kategori()->associate($kategori);
@@ -75,7 +70,6 @@ class NewsController extends Controller
         // if true, redirect to index
         return redirect()->route('news.index')
             ->with('success', 'Add data news success!');
-
     }
 
     /**
@@ -87,8 +81,7 @@ class NewsController extends Controller
     public function show($id)
     {
         $news = News::find($id);
-        $newsAll = News::all();
-        return view('news.view',['news'=>$news, 'newsAll'=>$newsAll]);
+        return view('news.view',['news'=>$news]);
     }
 
     /**
@@ -125,11 +118,9 @@ class NewsController extends Controller
         $kategori->id = $request->Kategori;
         $news->kategori()->associate($kategori);
         
-        $news->pesan_singkat = $request->isi;
         $news->isi = $request->isi;
         $news->save();
         return redirect()->route('news.index');
-
     }
 
     /**
@@ -142,20 +133,7 @@ class NewsController extends Controller
     {
         $news = News::find($id);
         $news->delete();
-        return redirect()->route('news.index');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroyKategori($id)
-    {
-        $kategori = Kategori::find($id);
-        $kategori->delete();
-        return redirect()->route('news.index');
+        return redirect()->route('main.index');
     }
 
     public function search(Request $request)

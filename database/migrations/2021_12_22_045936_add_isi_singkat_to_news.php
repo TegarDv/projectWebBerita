@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateNews extends Migration
+class AddIsiSingkatToNews extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,8 @@ class CreateNews extends Migration
      */
     public function up()
     {
-        Schema::create('news', function (Blueprint $table) {
-            $table->id();
-            $table->string('judul', 30);
-            $table->string('kategori', 30);
-            $table->string('pesan_singkat', 99);
-            $table->text('isi');
-            $table->timestamps();
+        Schema::table('news', function (Blueprint $table) {
+            $table->string('pesan_singkat')->after('kategori_id')->nullable();
         });
     }
 
@@ -30,6 +25,8 @@ class CreateNews extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('news');
+        Schema::table('news', function (Blueprint $table) {
+            $table->dropColumn('pesan_singkat');
+        });
     }
 }

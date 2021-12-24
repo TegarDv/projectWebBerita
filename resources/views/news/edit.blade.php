@@ -1,11 +1,13 @@
 @extends('layouts.app')
-
+@section('title')
+    Web Berita | Edit Berita
+@endsection
 @section('content')
-<div class="container">
+<div class="container mt-5">
     <div class="row justify-content-center">
-    <div class="col-md-8">
+    <div class="col-md-12">
         <div class="card">
-            <div class="card-header">{{ __('NEWS DATA') }}</div>
+            <div class="card-header mt-5" align="center">{{ __('EDIT BERITA') }}</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -33,13 +35,9 @@
                             </select></br>
                         </div>
                         <div class="form-group">
-                            <label for="isi">isi Yang Lama</label>
-                            <label for="isi">{{$news->isi}}</label>
-                            <input type="text" class="form-control" required="required" name="isi" value="{{$news->isi}}"></br>
-                        </div>
-                        <div class="form-group">
-                            <label for="isi">Isi Yang baru</label>
-                            <textarea class="form-control" required="required" name="isi" value="{{$news->isi}}"></textarea>
+                            <label for="isi">Isi Berita</label>
+                            <input id="isi" type="hidden" name="isi">
+                            <trix-editor input="isi">{{$news->isi}}</trix-editor>
                         </div>
                         <div class="form-group">
                             <label for="photo">News Image</label>

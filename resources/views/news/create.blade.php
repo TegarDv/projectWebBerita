@@ -1,7 +1,9 @@
 @extends('layouts.app')
-
+@section('title')
+    Web Berita | Add Berita
+@endsection
 @section('content')
-<div class="container">
+<div class="container mt-5">
     <div class="row justify-content-center">
     <div class="col-md-8">
     <div class="card-header" align="center"><b>{{ __('BUAT BERITA BARU') }}</b></div>
@@ -33,7 +35,8 @@
                         </div>
                         <div class="form-group">
                             <label for="isi">Isi</label>
-                            <input type="text" class="form-control" required="required" name="isi"></br>
+                            <input id="isi" type="hidden" name="isi">
+                            <trix-editor input="isi"></trix-editor>
                         </div>
                         <div class="form-group">
                             <label for="photo">Photo</label>
